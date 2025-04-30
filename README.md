@@ -2,6 +2,8 @@
 a school project
 
 
+il deployment del backend è stato fatto con render
+
 rotte:
 /login serve agli utenti per autenticarsi, prima di accedere alla "biblioteca online" devono autenticarsi
 per atenticarsi bisogna fare un POST verso <nome del sito fornit da vercel>/login 
