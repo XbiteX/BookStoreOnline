@@ -1,4 +1,4 @@
-
+const auth = require('./middleware/auth.js'); // importo il file auth.js
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -86,16 +86,28 @@ app.post("/login", async (req,res)=>{
 
 startServer();
 
-app.get("/mostViewedBooks",  async (req, res) => {
+app.get("/filter" , async (req, res) => {
     if(!database) {
         return res.status(500).json({message: 'Internal server error'});
     }
     try{
-        const result = await database.collection('books').find({}).sort({views: -1}).limit(10).toArray();
+        const category = req.query.category;
+        const subject = req.query.subject;
+
+
+        const filter = {}; // <-- inizializza un oggetto vuoto per il filtro
+            if (category) {
+                filter.categoria = category; // <-- aggiungi il filtro per categoria se categoria è fornita
+            }
+            if (subject) {
+                filter.soggetto = subject; // <-- aggiungi il filtro per materia se materia è fornita
+            }
+        const result = await database.collection('libri').find(filter).toArray();
+
         return res.json(result);
     } catch(error){
-        console.error('Internal getting most viewed books', error);
-        return res.status(500).json({message: 'Internal getting most viewed books'});
+        console.error(`Internal getting books`, error);
+        return res.status(500).json({message: 'Internal erroe'});
     }
 });
 
