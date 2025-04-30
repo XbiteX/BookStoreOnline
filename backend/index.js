@@ -31,7 +31,9 @@ const startServer = async () => {
     });
 }
  
-
+app.get('/', (req, res) => {
+    res.send('Hello there!');
+});
 
 //LOGIN route
 app.post("/login", async (req,res)=>{
