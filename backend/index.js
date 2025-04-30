@@ -16,7 +16,7 @@ const connectToData = async () => {
     try{
         const client = await MongoClient.connect(process.env.MONGO_URI);
         console.log('connect to database');
-        return client.db('MONGODB');
+        return client.db('BookStoreOnline'); // nome del database
     } catch(error){
         console.error(error);
         process.exit(1);
@@ -97,11 +97,12 @@ app.get("/filter" , async (req, res) => {
 
         const filter = {}; // <-- inizializza un oggetto vuoto per il filtro
             if (category) {
-                filter.categoria = category; // <-- aggiungi il filtro per categoria se categoria è fornita
+                filter["Categoria"] = category; // <-- aggiungi il filtro per categoria se categoria è fornita
             }
             if (subject) {
-                filter.soggetto = subject; // <-- aggiungi il filtro per materia se materia è fornita
+                filter["Disciplina"] = subject; // <-- aggiungi il filtro per materia se materia è fornita
             }
+        console.log(filter); // <-- logga il filtro per vedere cosa contiene
         const result = await database.collection('libri').find(filter).toArray();
 
         return res.json(result);

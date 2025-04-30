@@ -4,6 +4,10 @@ a school project
 
 il deployment del backend è stato fatto con render
 
+
+
+
+
 rotte:
 /login serve agli utenti per autenticarsi, prima di accedere alla "biblioteca online" devono autenticarsi
 per atenticarsi bisogna fare un POST verso <nome del sito fornit da vercel>/login 
@@ -28,3 +32,24 @@ controllerà nel header il codice jwt e un middleware verificherà che questo co
 |isa|password|nome|cognome|
 |---|--------|----|-------|
 |12345678|password|marco|rossi|
+
+### la tabella per i libri sarà così formata
+
+```json
+{"_id":{"$oid":"681275484beab4cfa7ca0af2"},
+"Codice libro":"22",
+"CDD":"671.36 CON",
+"Collocazione":"ARMADIO N.18",
+"Autore":"ASSOCIAZIONE ITALIANA DI METALLURGIA",
+"Titolo":"Convegno nazionale trattamenti termici",
+"Note":"",
+"Stato":"Prestabile",
+"Casa editrice":"ASS.ITALIANA METALLURGIA",
+"Prestabile":"VERO",
+"Categoria":"Scienze pure",
+"Disciplina":"Metallurgia"
+}
+```
+
+"Categoria" indica il più grande insieme di libri (es. scienze pure, tecnologie, letteratura, storia...)
+"disciplina" indica di cosa tratta quel libro (es. guerra, fisica, metallurgia, poetica...)
