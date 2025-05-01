@@ -93,9 +93,13 @@ app.get("/filter" , async (req, res) => {
         return res.status(500).json({message: 'Internal server error'});
     }
     try{
-        const category = req.query.category;
-        const subject = req.query.subject;
-
+        // Prendi i parametri di query dalla richiesta
+        const category = req.query.category; // categoria del libro
+        const subject = req.query.subject; // disciplina del libro
+        const author = req.query.author; // autore del libro
+        const title = req.query.title; // titolo del libro
+        const language = req.query.language; // lingua del libro
+        const status = req.query.status; // stato del libro
 
         const filter = {}; // <-- inizializza un oggetto vuoto per il filtro
             if (category) {
@@ -104,6 +108,19 @@ app.get("/filter" , async (req, res) => {
             if (subject) {
                 filter["Disciplina"] = subject; // <-- aggiungi il filtro per materia se materia è fornita
             }
+            if (author) {
+                filter["Autore"] = author; // <-- aggiungi il filtro per autore se autore è fornita
+            }
+            if (title) {
+                filter["Titolo"] = title; // <-- aggiungi il filtro per Titolo se Titolo è fornita
+            }
+            if (language) {
+                filter["Lingua"] = language; // <-- aggiungi il filtro per Lingua se Lingua è fornita
+            }
+            if (status) {
+                filter["Stato"] = status; // <-- aggiungi il filtro per Stato se Stato è fornita
+            }
+
         console.log(filter); // <-- logga il filtro per vedere cosa contiene
         const result = await database.collection('libri').find(filter).toArray();
 

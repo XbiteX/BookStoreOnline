@@ -8,8 +8,9 @@ il deployment del backend è stato fatto con render
 
 
 
-rotte:
-/login serve agli utenti per autenticarsi, prima di accedere alla "biblioteca online" devono autenticarsi
+##rotte:
+###/login 
+serve agli utenti per autenticarsi, prima di accedere alla "biblioteca online" devono autenticarsi
 per atenticarsi bisogna fare un POST verso <nome del sito fornit da vercel>/login 
 e il body sarà così formato:
 ```json 
@@ -22,7 +23,14 @@ se l'utente viene trovato nel database allora il backend invierà un codcice JWT
 ogni volta che farà una richiesta al server dovrà includere nel campo header questo codice jwt, il server una volta ricevuta la richesta 
 controllerà nel header il codice jwt e un middleware verificherà che questo codice jwt sia corretto.
 
-
+###/filter
+serve per filtrare i libri presenti nel database secondo determinate query:
+- /filter?category=Scienze pure --> filtra i dati in base alla categoria (es. Sceinze pure, Tecnologie, Letteratura...)
+- /filter?subject=Scienze pure --> filtra i dati in base alla disciplina (es. Metallurgia, Informatica, Fiscia, Guerra)
+- /filter?author=Scienze pure --> filtra i dati in base all'autore (es. Giovanni Pascoli, Giovanni Tonzig, Pippo Caio)
+- /filter?title=Scienze pure --> filtra i dati in base al titolo (es. Il visconte dimezzato, Fondamenti di meccanica classica...)
+- /filter?language=Scienze pure --> filtra i dati in base alla lingua (es. it, en, es)
+- /filter?status=Scienze pure --> filtra i dati in base alla status (es. disponibile, non disponibile, solo consultazione...)
 
 
 
