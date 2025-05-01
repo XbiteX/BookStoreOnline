@@ -35,21 +35,10 @@ controllerà nel header il codice jwt e un middleware verificherà che questo co
 
 ### la tabella per i libri sarà così formata
 
-```json
-{"_id":{"$oid":"681275484beab4cfa7ca0af2"},
-"Codice libro":"22",
-"CDD":"671.36 CON",
-"Collocazione":"ARMADIO N.18",
-"Autore":"ASSOCIAZIONE ITALIANA DI METALLURGIA",
-"Titolo":"Convegno nazionale trattamenti termici",
-"Note":"",
-"Stato":"Prestabile",
-"Casa editrice":"ASS.ITALIANA METALLURGIA",
-"Prestabile":"VERO",
-"Categoria":"Scienze pure",
-"Disciplina":"Metallurgia"
-}
-```
+| Codice libro | CDD        | Collocazione | Autore                               | Titolo                                 | Note | Stato      | Casa editrice           | Prestabile | Categoria     | Disciplina   |
+|--------------|------------|--------------|---------------------------------------|----------------------------------------|------|------------|--------------------------|------------|---------------|--------------|
+| 22           | 671.36 CON | ARMADIO N.18 | ASSOCIAZIONE ITALIANA DI METALLURGIA | Convegno nazionale trattamenti termici |      | Prestabile | ASS.ITALIANA METALLURGIA | VERO       | Scienze pure | Metallurgia  |
+
 
 "Categoria" indica il più grande insieme di libri (es. scienze pure, tecnologie, letteratura, storia...)
 "disciplina" indica di cosa tratta quel libro (es. guerra, fisica, metallurgia, poetica...)
