@@ -1,5 +1,7 @@
 const auth = require('./middleware/auth.js'); // importo il file auth.js
+const buildazioneToken = require('./utilities.js'); // importo il file utilities.js
 const express = require('express');
+const jwt = require('jsonwebtoken'); // importo il pacchetto jsonwebtoken
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const {MongoClient} = require('mongodb');
