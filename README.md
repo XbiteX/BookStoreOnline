@@ -23,7 +23,7 @@ se l'utente viene trovato nel database allora il backend invierà un codcice JWT
 ogni volta che farà una richiesta al server dovrà includere nel campo header questo codice jwt, il server una volta ricevuta la richesta 
 controllerà nel header il codice jwt e un middleware verificherà che questo codice jwt sia corretto.
 
-###/filter
+### /filter
 serve per filtrare i libri presenti nel database secondo determinate query:
 - /filter?category=Scienze pure --> filtra i dati in base alla categoria (es. Sceinze pure, Tecnologie, Letteratura...)
 - /filter?subject=Scienze pure --> filtra i dati in base alla disciplina (es. Metallurgia, Informatica, Fiscia, Guerra)
