@@ -1,5 +1,5 @@
 # BookStoreOnline
-a school project
+questo è un progetto scolastico per gestire una biblioteca
 
 
 il deployment del backend è stato fatto con render
