@@ -1,4 +1,4 @@
-# BookStoreOnline
+# Libreria scolastica
 questo è un progetto scolastico per gestire una biblioteca
 
 
