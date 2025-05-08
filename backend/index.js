@@ -1,4 +1,5 @@
 const auth = require('./middleware/auth.js'); // importo il file auth.js
+const authAdmin = require('./middleware/authAdmin.js'); // importo il file authAdmin.js
 const buildazioneToken = require('./utilities.js'); // importo il file utilities.js
 const express = require('express');
 const jwt = require('jsonwebtoken'); // importo il pacchetto jsonwebtoken
@@ -61,7 +62,7 @@ app.post("/login", async (req,res)=>{
             return res.status(400).json({message:"utente non trovato"})
         }
 
-        let token = buildazioneToken(user.nome, process.env.CHIAVE_JWT) // creazione del token attraverso la funzione importata
+        let token = buildazioneToken(user.nome, process.env.CHIAVE_JWT, user.ruolo) // creazione del token attraverso la funzione importata
         console.log(token) 
 
         const decoded = jwt.verify(token, process.env.CHIAVE_JWT); //verifica della correttezza del token
@@ -84,11 +85,9 @@ app.post("/login", async (req,res)=>{
 
 })
 
-
-
 startServer();
 
-app.get("/filter" , async (req, res) => {
+app.get("/books" ,auth, async (req, res) => {
     if(!database) {
         return res.status(500).json({message: 'Internal server error'});
     }
@@ -122,8 +121,8 @@ app.get("/filter" , async (req, res) => {
             }
 
         console.log(filter); // <-- logga il filtro per vedere cosa contiene
-        const result = await database.collection('libri').find(filter).toArray();
-
+        const result = await database.collection('books').find(filter).toArray();
+        console.log(result); // <-- logga il risultato per vedere cosa contiene
         return res.json(result);
     } catch(error){
         console.error(`Internal getting books`, error);
@@ -131,4 +130,56 @@ app.get("/filter" , async (req, res) => {
     }
 });
 
+
+//rotta per aggiungere un libro, solo l'admin lo può fare
+app.post("/addBook",authAdmin, async (req, res) => {
+    if(!database) {
+        return res.status(500).json({message: 'Internal server error'});
+    }
+    try{
+        // // const book = req.body; // prendo il libro dal body della richiesta
+        // console.log(book); // logga il libro per vedere cosa contiene
+        // const result = await database.collection('books').insertOne(book); // inserisco il libro nel database
+        // console.log(result); // logga il risultato per vedere cosa contiene
+        // return res.json(result); // ritorna il risultato al client
+        return res.status(200).json({message: 'tt ok'}); // ritorna un messaggio di successo al client
+    } catch(error){
+        console.error(`Internal adding book`, error);
+        return res.status(500).json({message: 'Internal erroe'});
+    }
+});
+
+//rotta per eliminare un libro, solo l'admin lo può fare
+app.delete("/deleteBook",authAdmin, async (req, res) => {
+    if(!database) {
+        return res.status(500).json({message: 'Internal server error'});
+    }
+    try{
+        // const bookId = req.body.id; // prendo l'id del libro dal body della richiesta
+        // console.log(bookId); // logga l'id del libro per vedere cosa contiene
+        // const result = await database.collection('books').deleteOne({_id: bookId}); // elimino il libro dal database
+        // console.log(result); // logga il risultato per vedere cosa contiene
+        // return res.json(result); // ritorna il risultato al client
+    } catch(error){
+        console.error(`Internal deleting book`, error);
+        return res.status(500).json({message: 'Internal erroe'});
+    }
+});
+
+//rotta per modificare un libro, solo l'admin lo può fare
+app.patch("/updateBook",authAdmin, async (req, res) => {
+    if(!database) {
+        return res.status(500).json({message: 'Internal server error'});
+    }
+    try{
+        // const bookId = req.body.id; // prendo l'id del libro dal body della richiesta
+        // console.log(bookId); // logga l'id del libro per vedere cosa contiene
+        // const result = await database.collection('books').deleteOne({_id: bookId}); // elimino il libro dal database
+        // console.log(result); // logga il risultato per vedere cosa contiene
+        // return res.json(result); // ritorna il risultato al client
+    } catch(error){
+        console.error(`Internal deleting book`, error);
+        return res.status(500).json({message: 'Internal erroe'});
+    }
+});
  

@@ -8,10 +8,11 @@ const options = {
     }
 }
 
-function buildazioneToken (codiceISA, chiave) {
+function buildazioneToken (codiceISA, chiave, ruolo) {
 
     const payload = {
-        isa: codiceISA
+        isa: codiceISA,
+        ruolo: ruolo
       }
 
       const token = jwt.sign(payload, chiave, options);
